@@ -17,10 +17,13 @@ init:
 	cabal sandbox init
 
 install: init
-	cabal install --only-dependencies
+	cabal install --enable-tests --only-dependencies
 
 repl:
 	cabal repl
 
-repl:
+run:
 	cabal run
+
+test:
+	cabal test
