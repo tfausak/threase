@@ -2,7 +2,7 @@
 
 [![Build Status][2]][3]
 
-Plays [Threes][4] games with ease.
+Plays [Threes][4] with ease.
 
 ``` sh
 make
