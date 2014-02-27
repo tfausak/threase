@@ -47,6 +47,7 @@ library
         Haskell2010
     exposed-modules:
         Threase
+        Threase.Tile
         -- X.X.X
     ghc-prof-options:
         -auto-all
@@ -92,8 +93,10 @@ test-suite hspec
         Spec.hs
     other-modules:
         Threase
+        Threase.Tile
         -- X.X.X
         ThreaseSpec
+        Threase.TileSpec
         -- X.X.XSpec
     type:
         exitcode-stdio-1.0
