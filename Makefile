@@ -1,5 +1,8 @@
 .PHONY: clean format init install
 
+bench:
+	cabal bench
+
 clean:
 	cabal clean
 	if test -d .cabal-sandbox; then cabal sandbox delete; fi
@@ -17,7 +20,7 @@ init:
 	cabal sandbox init
 
 install: init
-	cabal install --enable-tests --only-dependencies
+	cabal install --enable-benchmarks --enable-tests --flags=documentation --only-dependencies
 
 repl:
 	cabal repl

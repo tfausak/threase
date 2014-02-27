@@ -149,3 +149,17 @@ test-suite hlint
         HLint.hs
     type:
         exitcode-stdio-1.0
+
+benchmark benchmarks
+    build-depends:
+        base
+      , threase
+      , criterion == 0.6.*
+    default-language:
+        Haskell2010
+    hs-source-dirs:
+        benchmark
+    main-is:
+        Bench.hs
+    type:
+        exitcode-stdio-1.0
