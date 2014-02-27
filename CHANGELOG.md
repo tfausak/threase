@@ -2,4 +2,4 @@
 
 ## [Master][]
 
-[master]: https://github.com/tfausak/threase/compare/...master
+[master]: https://github.com/tfausak/threase/compare/9ac83fc...master
