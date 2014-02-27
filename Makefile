@@ -1,17 +1,22 @@
 .PHONY: clean format init install
 
 bench:
+	cabal configure --enable-benchmarks
+	cabal build
 	cabal bench
 
 clean:
 	cabal clean
 	if test -d .cabal-sandbox; then cabal sandbox delete; fi
+	if test -d .hpc; then rm -r .hpc; fi
 
 format:
 	git ls-files '*.hs' | xargs -n 1 scan --inplace-modify
 	git ls-files '*.hs' | xargs stylish-haskell --inplace
 
 haddock:
+	cabal configure
+	cabal build
 	cabal haddock --hyperlink-source
 
 init:
@@ -23,10 +28,16 @@ install: init
 	cabal install --enable-benchmarks --enable-tests --flags=documentation --only-dependencies
 
 repl:
-	cabal repl
+	cabal configure
+	cabal build
+	cabal repl lib:threase
 
 run:
-	cabal run
+	cabal configure
+	cabal build
+	cabal run threase
 
 test:
+	cabal configure --enable-tests
+	cabal build
 	cabal test
