@@ -1,6 +1,6 @@
 module ThreaseSpec (spec) where
 
-import Test.Hspec
+import           Test.Hspec
 
 {-# ANN spec "HLint: ignore Redundant do" #-}
 spec :: Spec

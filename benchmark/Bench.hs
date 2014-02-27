@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Criterion.Main
+import           Criterion.Main (bgroup, defaultMain)
 import qualified ThreaseBench
 
 main :: IO ()

@@ -1,6 +1,6 @@
 module ThreaseBench (benchmarks) where
 
-import Criterion
+import           Criterion
 
 benchmarks :: [Benchmark]
 benchmarks = []
