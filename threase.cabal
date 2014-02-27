@@ -1,0 +1,40 @@
+author:
+    Taylor Fausak
+bug-reports:
+    https://github.com/tfausak/threase/issues
+build-type:
+    Simple
+cabal-version:
+    >= 1.18
+category:
+    Game
+copyright:
+    2014 Taylor Fausak <taylor@fausak.me>
+--description:
+extra-source-files:
+    CHANGELOG.md
+    CONTRIBUTING.md
+    README.md
+homepage:
+    https://github.com/tfausak/threase
+license-file:
+    LICENSE.txt
+license:
+    MIT
+maintainer:
+    taylor@fausak.me
+name:
+    threase
+synopsis:
+    Plays Threes games with ease.
+version:
+    0.0.0
+
+source-repository head
+    location:
+        git://github.com/tfausak/threase.git
+    type:
+        git
+
+library
+    default-language: Haskell2010
