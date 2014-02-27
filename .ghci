@@ -1,2 +1,3 @@
 :set prompt "\955 "
 :load Threase
+-- :load X.X.X

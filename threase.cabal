@@ -47,6 +47,7 @@ library
         Haskell2010
     exposed-modules:
         Threase
+        -- X.X.X
     ghc-prof-options:
         -auto-all
         -prof
@@ -91,7 +92,9 @@ test-suite hspec
         Spec.hs
     other-modules:
         Threase
+        -- X.X.X
         ThreaseSpec
+        -- X.X.XSpec
     type:
         exitcode-stdio-1.0
 
