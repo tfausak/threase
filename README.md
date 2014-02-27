@@ -5,7 +5,8 @@
 Plays [Threes][4] with ease.
 
 ``` sh
-make
+make install
+make repl
 ```
 
 [1]: https://github.com/tfausak/threase

@@ -36,5 +36,23 @@ source-repository head
     type:
         git
 
+flag documentation
+    default:
+        False
+
 library
-    default-language: Haskell2010
+    build-depends:
+        base
+    default-language:
+        Haskell2010
+    exposed-modules:
+        Threase
+    ghc-prof-options:
+        -auto-all
+        -prof
+    hs-source-dirs:
+        library
+
+    if flag(documentation)
+        build-depends:
+            hscolour == 1.20.*
