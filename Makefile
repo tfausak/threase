@@ -21,3 +21,6 @@ install: init
 
 repl:
 	cabal repl
+
+repl:
+	cabal run
