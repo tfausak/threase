@@ -1,4 +1,6 @@
-.PHONY: clean format init install
+.PHONY: bench clean format haddock hpc init install repl run test
+
+all: install format hpc bench haddock run
 
 bench:
 	cabal configure --enable-benchmarks
