@@ -48,6 +48,7 @@ library
     exposed-modules:
         Threase
         Threase.Tile
+        Threase.Vector
         -- X.X.X
     ghc-prof-options:
         -auto-all
@@ -94,9 +95,11 @@ test-suite hspec
     other-modules:
         Threase
         Threase.Tile
+        Threase.Vector
         -- X.X.X
         ThreaseSpec
         Threase.TileSpec
+        Threase.VectorSpec
         -- X.X.XSpec
     type:
         exitcode-stdio-1.0

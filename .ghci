@@ -1,4 +1,5 @@
 :set prompt "\955 "
 :load Threase
 :load Threase.Tile
+:load Threase.Vector
 -- :load X.X.X
