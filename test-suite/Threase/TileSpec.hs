@@ -9,40 +9,39 @@ spec = do
     describe "add" $ do
         it "returns 3 for 1 and 2" $ do
             let a = Tile 1
-            let b = Tile 2
-            value (add a b) `shouldBe` 3
+                b = Tile 2
+            add a b `shouldBe` Tile 3
 
         it "returns 6 for 3 and 3" $ do
             let a = Tile 3
-            let b = Tile 3
-            value (add a b) `shouldBe` 6
+            add a a `shouldBe` Tile 6
 
         prop "returns the sum of the values" $
-            \ a b -> value (add (Tile a) (Tile b)) == a + b
+            \ a b -> add (Tile a) (Tile b) == Tile (a + b)
 
     describe "canAdd" $ do
         it "returns True for 1 and 2" $ do
             let a = Tile 1
-            let b = Tile 2
+                b = Tile 2
             canAdd a b `shouldBe` True
 
         it "returns False for 1 and 1" $ do
             let a = Tile 1
-            let b = Tile 1
+                b = Tile 1
             canAdd a b `shouldBe` False
 
         it "returns False for 2 and 2" $ do
             let a = Tile 1
-            let b = Tile 1
+                b = Tile 1
             canAdd a b `shouldBe` False
 
         it "returns True for 3 and 3" $ do
             let a = Tile 3
-            let b = Tile 3
+                b = Tile 3
             canAdd a b `shouldBe` True
 
         prop "returns True for pairs other than 1 and 2" $
-            \ n -> n == 1 || n == 2 || canAdd (Tile n) (Tile n)
+            \ n -> n < 3 || canAdd (Tile n) (Tile n)
 
     describe "score" $ do
         it "returns 0 for 1" $ do
@@ -58,4 +57,4 @@ spec = do
             score (Tile 6) `shouldBe` 9
 
         prop "returns 3 ^ (n / 3)" $
-            \ n -> n < 3 || score (Tile n) == 3 ^ (div n 3)
+            \ n -> n < 3 || score (Tile n) == 3 ^ (n `div` 3)

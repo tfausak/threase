@@ -4,7 +4,7 @@ module Threase.Tile (Tile (..), add, canAdd, score) where
 -- | Represents a tile on the board.
 data Tile = Tile
     { value :: Int -- ^ The number on the face of the tile.
-    }
+    } deriving (Eq, Show)
 
 -- | Adds two tiles together.
 add :: Tile -- ^ The first tile.
