@@ -18,6 +18,12 @@ haddock:
 	cabal configure
 	cabal build
 	cabal haddock --hyperlink-source
+	if which open; then open dist/doc/html/threase/index.html; fi
+
+hpc: test
+	hpc report dist/hpc/tix/hspec/hspec.tix
+	hpc markup --destdir=tmp dist/hpc/tix/hspec/hspec.tix
+	if which open; then open tmp/hpc_index.html; fi
 
 init:
 	cabal update
