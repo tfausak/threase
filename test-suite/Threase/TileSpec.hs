@@ -43,3 +43,19 @@ spec = do
 
         prop "returns True for pairs other than 1 and 2" $
             \ n -> n == 1 || n == 2 || canAdd (Tile n) (Tile n)
+
+    describe "score" $ do
+        it "returns 0 for 1" $ do
+            score (Tile 1) `shouldBe` 0
+
+        it "returns 0 for 2" $ do
+            score (Tile 2) `shouldBe` 0
+
+        it "returns 3 for 3" $ do
+            score (Tile 3) `shouldBe` 3
+
+        it "returns 9 for 6" $ do
+            score (Tile 6) `shouldBe` 9
+
+        prop "returns 3 ^ (n / 3)" $
+            \ n -> n < 3 || score (Tile n) == 3 ^ (div n 3)
