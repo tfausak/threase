@@ -1,6 +1,7 @@
 -- | Types and tools for working with the entire Threes board.
-module Threase.Board (Board (..), canShift, score, shift) where
+module Threase.Board (Board (..), canShift, rotations, score, shift) where
 
+import           Data.List      (transpose)
 import qualified Threase.Vector as V
 
 -- | A board of tiles.
@@ -13,6 +14,15 @@ vectors can be shifted. -}
 canShift :: Board -- ^ The board.
     -> Bool -- ^ Can the board be shifted?
 canShift = any V.canShift . rows
+
+-- | Generate all the boards that can be made by rotating the board.
+rotations :: Board -- ^ The input board.
+    -> [Board] -- ^ The rotated boards.
+rotations = take 4 . iterate rotate
+  where
+    rotate = fromLists . fmap reverse . transpose . toLists
+    toLists = fmap V.tiles . rows
+    fromLists = Board . fmap V.Vector
 
 -- | Calculate the score of a board by summing the scores of the vectors.
 score :: Board -- ^ The board.

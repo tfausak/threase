@@ -1,9 +1,10 @@
 module Threase.BoardSpec (spec) where
 
 import           Test.Hspec
+import           Test.Hspec.QuickCheck
 import           Threase.Board
-import           Threase.Tile   (Tile (..))
-import           Threase.Vector (Vector (..))
+import           Threase.Tile          (Tile (..))
+import           Threase.Vector        (Vector (..))
 
 spec :: Spec
 spec = do
@@ -28,6 +29,21 @@ spec = do
                 v' = Vector [n, t, n, n]
                 b = Board [v, v, v, v']
             canShift b `shouldBe` True
+
+    describe "rotations" $ do
+        it "returns the rotations in clockwise order" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                b = Board [Vector [n, n], Vector [n, t]]
+            rotations b `shouldBe`
+                [ Board [Vector [n, n], Vector [n, t]]
+                , Board [Vector [n, n], Vector [t, n]]
+                , Board [Vector [t, n], Vector [n, n]]
+                , Board [Vector [n, t], Vector [n, n]]
+                ]
+
+        prop "returns 4 boards" $
+            \ n -> length (rotations (Board [Vector [Just (Tile n)]])) == 4
 
     describe "score" $ do
         it "returns 0 for an empty board" $ do
