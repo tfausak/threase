@@ -6,4 +6,5 @@ import           Threase.Board
 benchmarks :: [Benchmark]
 benchmarks =
     [ bench "score" $ whnf score (Board [])
+    , bench "shift" $ whnf shift (Board [])
     ]

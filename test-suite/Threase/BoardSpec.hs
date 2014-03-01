@@ -19,3 +19,28 @@ spec = do
                 v = Vector (replicate 4 t)
                 b = Board (replicate 4 v)
             score b `shouldBe` 48
+
+    describe "shift" $ do
+        it "returns itself for an empty board" $ do
+            let t = Nothing
+                v = Vector (replicate 4 t)
+                b = Board (replicate 4 v)
+            shift b `shouldBe` b
+
+        it "returns a board with all the vectors shifted" $ do
+            let n = Nothing
+                t = Just (Tile 3)
+                b = Board
+                    [ Vector [n, n, n, n]
+                    , Vector [t, n, n, n]
+                    , Vector [n, n, n, t]
+                    , Vector [t, t, t, t]
+                    ]
+                t' = Just (Tile 6)
+                b' = Board
+                    [ Vector [n, n, n, n]
+                    , Vector [t, n, n, n]
+                    , Vector [n, n, t, n]
+                    , Vector [t', t, t, n]
+                    ]
+            shift b `shouldBe` b'

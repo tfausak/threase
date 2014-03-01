@@ -1,5 +1,5 @@
 -- | Types and tools for working with the entire Threes board.
-module Threase.Board (Board (..), score) where
+module Threase.Board (Board (..), score, shift) where
 
 import qualified Threase.Vector as V
 
@@ -12,3 +12,8 @@ data Board = Board
 score :: Board -- ^ The board.
     -> Int -- ^ The score.
 score = sum . fmap V.score . rows
+
+-- | Shift all of a board's vectors.
+shift :: Board -- ^ The input board.
+    -> Board -- ^ The shifted board.
+shift = Board . fmap V.shift . rows
