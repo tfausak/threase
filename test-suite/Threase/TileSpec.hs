@@ -28,6 +28,11 @@ spec = do
                 b = Tile 2
             canAdd a b `shouldBe` True
 
+        it "returns True for 2 and 1" $ do
+            let a = Tile 2
+                b = Tile 1
+            canAdd a b `shouldBe` True
+
         it "returns False for 1 and 1" $ do
             let a = Tile 1
                 b = Tile 1
@@ -64,3 +69,7 @@ spec = do
 
         prop "returns 3 ^ (n / 3)" $
             \ n -> n < 3 || score (Tile n) == 3 ^ (n `div` 3)
+
+    describe "value" $ do
+        prop "returns the tile's value" $
+            \ n -> value (Tile n) == n

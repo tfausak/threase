@@ -26,6 +26,12 @@ spec = do
                 v = Vector [t, t, Nothing, Nothing]
             canShift v `shouldBe` True
 
+        it "returns true with addable tiles after unaddable ones" $ do
+            let a = Just (Tile 1)
+                b = Just (Tile 2)
+                v = Vector [a, a, b, Nothing]
+            canShift v `shouldBe` True
+
     describe "score" $ do
         it "returns 0 for an empty vector" $ do
             let v = Vector [Nothing, Nothing, Nothing, Nothing]
