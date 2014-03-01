@@ -19,11 +19,11 @@ canAdd :: Tile -- ^ The first tile.
 canAdd (Tile a) (Tile b) =
     (a == 1 && b == 2) ||
     (a == 2 && b == 1) ||
-    (a /= 1 && a /= 2 && a == b)
+    (a > 2 && a == b)
 
 -- | Calculates the score for a tile.
 score :: Tile -- ^ The tile.
     -> Int -- ^ The score.
-score (Tile n) = if n == 1 || n == 2
+score (Tile n) = if n < 3
     then 0
     else 3 ^ (n `div` 3)

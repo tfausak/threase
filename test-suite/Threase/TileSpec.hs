@@ -19,6 +19,9 @@ spec = do
         prop "returns the sum of the values" $
             \ a b -> add (Tile a) (Tile b) == Tile (a + b)
 
+        prop "is commutative" $
+            \ a b -> add (Tile a) (Tile b) == add (Tile b) (Tile a)
+
     describe "canAdd" $ do
         it "returns True for 1 and 2" $ do
             let a = Tile 1
@@ -42,6 +45,9 @@ spec = do
 
         prop "returns True for pairs other than 1 and 2" $
             \ n -> n < 3 || canAdd (Tile n) (Tile n)
+
+        prop "is commutative" $
+            \ a b -> canAdd (Tile a) (Tile b) == canAdd (Tile b) (Tile a)
 
     describe "score" $ do
         it "returns 0 for 1" $ do
