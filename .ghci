@@ -2,4 +2,5 @@
 :load Threase
 :load Threase.Tile
 :load Threase.Vector
+:load Threase.Board
 -- :load X.X.X

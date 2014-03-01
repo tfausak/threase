@@ -49,6 +49,7 @@ library
         Threase
         Threase.Tile
         Threase.Vector
+        Threase.Board
         -- X.X.X
     ghc-prof-options:
         -auto-all
@@ -96,10 +97,12 @@ test-suite hspec
         Threase
         Threase.Tile
         Threase.Vector
+        Threase.Board
         -- X.X.X
         ThreaseSpec
         Threase.TileSpec
         Threase.VectorSpec
+        Threase.BoardSpec
         -- X.X.XSpec
     type:
         exitcode-stdio-1.0
