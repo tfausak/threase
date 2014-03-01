@@ -6,6 +6,19 @@ import           Threase.Vector
 
 spec :: Spec
 spec = do
+    describe "score" $ do
+        it "returns 0 form an empty vector" $ do
+            let v = Vector [Nothing, Nothing, Nothing, Nothing]
+            score v `shouldBe` 0
+
+        it "returns the sum of the scores of the tiles" $ do
+            let a = Just (Tile 1)
+                b = Just (Tile 2)
+                c = Just (Tile 3)
+                d = Just (Tile 6)
+                v = Vector [a, b, c, d]
+            score v `shouldBe` 12
+
     describe "shift" $ do
         it "does nothing to an empty vector" $ do
             let v = Vector [Nothing, Nothing, Nothing, Nothing]
