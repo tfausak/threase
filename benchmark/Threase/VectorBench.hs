@@ -5,5 +5,5 @@ import           Threase.Vector
 
 benchmarks :: [Benchmark]
 benchmarks =
-    [ bench "squish" $ whnf squish (Vector [])
+    [ bench "shift" $ whnf shift (Vector [])
     ]
