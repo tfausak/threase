@@ -1,8 +1,8 @@
 module Threase.VectorSpec (spec) where
 
-import Test.Hspec
-import Threase.Tile (Tile (..))
-import Threase.Vector
+import           Test.Hspec
+import           Threase.Tile   (Tile (..))
+import           Threase.Vector
 
 spec :: Spec
 spec = do

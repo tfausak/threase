@@ -1,7 +1,7 @@
 module Threase.VectorBench (benchmarks) where
 
-import Criterion
-import Threase.Vector
+import           Criterion
+import           Threase.Vector
 
 benchmarks :: [Benchmark]
 benchmarks =
