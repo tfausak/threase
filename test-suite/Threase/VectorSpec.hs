@@ -6,8 +6,28 @@ import           Threase.Vector
 
 spec :: Spec
 spec = do
+    describe "canShift" $ do
+        it "returns true for an empty vector" $ do
+            let v = Vector [Nothing, Nothing, Nothing, Nothing]
+            canShift v `shouldBe` True
+
+        it "returns false with a tile at the head" $ do
+            let t = Just (Tile 1)
+                v = Vector [t, Nothing, Nothing, Nothing]
+            canShift v `shouldBe` False
+
+        it "returns true with a tile not at the head" $ do
+            let t = Just (Tile 1)
+                v = Vector [Nothing, t, Nothing, Nothing]
+            canShift v `shouldBe` True
+
+        it "returns true with addable tiles" $ do
+            let t = Just (Tile 3)
+                v = Vector [t, t, Nothing, Nothing]
+            canShift v `shouldBe` True
+
     describe "score" $ do
-        it "returns 0 form an empty vector" $ do
+        it "returns 0 for an empty vector" $ do
             let v = Vector [Nothing, Nothing, Nothing, Nothing]
             score v `shouldBe` 0
 

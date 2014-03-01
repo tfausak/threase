@@ -1,5 +1,5 @@
 -- | Types and tools for working with linear arrays of tiles.
-module Threase.Vector (Vector (..), score, shift) where
+module Threase.Vector (Vector (..), canShift, score, shift) where
 
 import           Data.Maybe   (catMaybes)
 import           Data.Monoid  ((<>))
@@ -9,6 +9,16 @@ import qualified Threase.Tile as T
 data Vector = Vector
     { tiles :: [Maybe T.Tile] -- ^ The tiles in this row or column.
     } deriving (Eq, Show)
+
+-- | Can a vector be shifted?
+canShift :: Vector -- ^ The vector.
+    -> Bool -- ^ Can it be shifted?
+canShift = go . tiles
+  where
+    go (Nothing : _) = True
+    go (Just a : b'@(Just b) : rest) =
+        T.canAdd a b || canShift (Vector (b' : rest))
+    go _ = False
 
 {- | Calculate the score for a vector. The score is the sum of the scores of
 the tiles. -}
