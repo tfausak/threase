@@ -1,6 +1,7 @@
 -- | Types and tools for working with linear arrays of tiles.
-module Threase.Vector (Vector (..), canShift, score, shift) where
+module Threase.Vector (Vector (..), canShift, render, score, shift) where
 
+import           Data.List    (intercalate)
 import           Data.Maybe   (catMaybes)
 import           Data.Monoid  ((<>))
 import qualified Threase.Tile as T
@@ -19,6 +20,11 @@ canShift = go . tiles
     go (Just a : b'@(Just b) : rest) =
         T.canAdd a b || canShift (Vector (b' : rest))
     go _ = False
+
+-- | Render the vector in a human-readable format.
+render :: Vector -- ^ The vector.
+    -> String -- ^ A human-readable representation.
+render = intercalate "\t" . fmap (maybe "-" T.render) . tiles
 
 {- | Calculate the score for a vector. The score is the sum of the scores of
 the tiles. -}

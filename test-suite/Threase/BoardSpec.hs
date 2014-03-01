@@ -30,6 +30,13 @@ spec = do
                 b = Board [v, v, v, v']
             canShift b `shouldBe` True
 
+    describe "render" $ do
+        it "returns the rendered vectors joined by newlines" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                b = Board [Vector [n, n], Vector [n, t]]
+            render b `shouldBe` "-\t-\n-\t1\n"
+
     describe "rotations" $ do
         it "returns the rotations in clockwise order" $ do
             let n = Nothing

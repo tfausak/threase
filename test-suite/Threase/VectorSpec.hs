@@ -32,6 +32,13 @@ spec = do
                 v = Vector [a, a, b, Nothing]
             canShift v `shouldBe` True
 
+    describe "render" $ do
+        it "returns the rendered tiles joined by tabs" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                v = Vector [n, t]
+            render v `shouldBe` "-\t1"
+
     describe "score" $ do
         it "returns 0 for an empty vector" $ do
             let v = Vector [Nothing, Nothing, Nothing, Nothing]

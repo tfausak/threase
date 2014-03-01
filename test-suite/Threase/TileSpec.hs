@@ -54,6 +54,10 @@ spec = do
         prop "is commutative" $
             \ a b -> canAdd (Tile a) (Tile b) == canAdd (Tile b) (Tile a)
 
+    describe "render" $ do
+        prop "returns the value as a string" $
+            \ n -> render (Tile n) == show n
+
     describe "score" $ do
         it "returns 0 for 1" $ do
             score (Tile 1) `shouldBe` 0

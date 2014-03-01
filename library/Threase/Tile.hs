@@ -1,5 +1,5 @@
 -- | Exports Tile data type and functions for manipulating it.
-module Threase.Tile (Tile (..), add, canAdd, score) where
+module Threase.Tile (Tile (..), add, canAdd, render, score) where
 
 -- | Represents a tile on the board.
 data Tile = Tile
@@ -20,6 +20,11 @@ canAdd (Tile a) (Tile b) =
     (a == 1 && b == 2) ||
     (a == 2 && b == 1) ||
     (a > 2 && a == b)
+
+-- | Render the tile in a human-readable format.
+render :: Tile -- ^ The tile.
+    -> String -- ^ A human-readable string representation.
+render = show . value
 
 -- | Calculates the score for a tile.
 score :: Tile -- ^ The tile.
