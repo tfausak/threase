@@ -7,6 +7,28 @@ import           Threase.Vector (Vector (..))
 
 spec :: Spec
 spec = do
+    describe "canShift" $ do
+        it "returns True for an empty board" $ do
+            let t = Nothing
+                v = Vector (replicate 4 t)
+                b = Board (replicate 4 v)
+            canShift b `shouldBe` True
+
+        it "returns False if none of the vectors can be shifted" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                v = Vector [t, n, n, n]
+                b = Board (replicate 4 v)
+            canShift b `shouldBe` False
+
+        it "returns True if any of the vectors can be shifted" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                v = Vector [t, n, n, n]
+                v' = Vector [n, t, n, n]
+                b = Board [v, v, v, v']
+            canShift b `shouldBe` True
+
     describe "score" $ do
         it "returns 0 for an empty board" $ do
             let t = Nothing
