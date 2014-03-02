@@ -30,8 +30,7 @@ data Board = Board
     >>> canShift board
     True
 -}
-canShift :: Board -- ^ The board.
-    -> Bool -- ^ Can the board be shifted?
+canShift :: Board -> Bool
 canShift = any V.canShift . rows
 
 {- |
@@ -40,8 +39,7 @@ canShift = any V.canShift . rows
     >>> render board
     "-\t3\n1\t2\n"
 -}
-render :: Board -- ^ The board.
-    -> String -- ^ A human-readable representation.
+render :: Board -> String
 render = unlines . fmap V.render . rows
 
 {- |
@@ -50,8 +48,7 @@ render = unlines . fmap V.render . rows
     >>> map render (rotations board)
     ["-\t3\n1\t2\n","1\t-\n2\t3\n","2\t1\n3\t-\n","3\t2\n-\t1\n"]
 -}
-rotations :: Board -- ^ The input board.
-    -> [Board] -- ^ The rotated boards.
+rotations :: Board -> [Board]
 rotations = take 4 . iterate rotate
   where
     rotate = fromLists . fmap reverse . transpose . toLists
@@ -65,8 +62,7 @@ rotations = take 4 . iterate rotate
     >>> score board
     3
 -}
-score :: Board -- ^ The board.
-    -> Int -- ^ The score.
+score :: Board -> Int
 score = sum . fmap V.score . rows
 
 {- |
@@ -75,6 +71,5 @@ score = sum . fmap V.score . rows
     >>> render (shift board)
     "3\t-\n3\t-\n"
 -}
-shift :: Board -- ^ The input board.
-    -> Board -- ^ The shifted board.
+shift :: Board -> Board
 shift = Board . fmap V.shift . rows

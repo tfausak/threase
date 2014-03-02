@@ -17,8 +17,7 @@ data Vector = Vector
     >>> canShift (Vector [Nothing, Just (T.Tile 3)])
     True
 -}
-canShift :: Vector -- ^ The vector.
-    -> Bool -- ^ Can it be shifted?
+canShift :: Vector -> Bool
 canShift = go . tiles
   where
     go (Nothing : _) = True
@@ -32,8 +31,7 @@ canShift = go . tiles
     >>> render (Vector [Nothing, Just (T.Tile 3)])
     "-\t3"
 -}
-render :: Vector -- ^ The vector.
-    -> String -- ^ A human-readable representation.
+render :: Vector -> String
 render = intercalate "\t" . fmap (maybe "-" T.render) . tiles
 
 {- |
@@ -42,8 +40,7 @@ render = intercalate "\t" . fmap (maybe "-" T.render) . tiles
     >>> score (Vector [Nothing, Just (T.Tile 6)])
     9
 -}
-score :: Vector -- ^ The input vector.
-    -> Int -- ^ The vector's score.
+score :: Vector -> Int
 score = sum . fmap T.score . catMaybes . tiles
 
 {- |
@@ -64,8 +61,7 @@ score = sum . fmap T.score . catMaybes . tiles
     >>> shift (Vector [Just (T.Tile 1), Just (T.Tile 2)])
     Vector {tiles = [Just (Tile {value = 3}),Nothing]}
 -}
-shift :: Vector -- ^ The vector.
-    -> Vector -- ^ The shifted vector.
+shift :: Vector -> Vector
 shift v = go (tiles v)
   where
     go (Nothing : rest) = Vector (rest <> [Nothing])

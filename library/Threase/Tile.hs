@@ -21,9 +21,7 @@ data Tile = Tile
     >>> add t t
     Tile {value = 2}
 -}
-add :: Tile -- ^ The first tile.
-    -> Tile -- ^ The second tile.
-    -> Tile -- ^ The new tile.
+add :: Tile -> Tile -> Tile
 add (Tile a) (Tile b) = Tile (a + b)
 
 {- |
@@ -32,9 +30,7 @@ add (Tile a) (Tile b) = Tile (a + b)
     >>> canAdd (Tile 1) (Tile 2)
     True
 -}
-canAdd :: Tile -- ^ The first tile.
-    -> Tile -- ^ The second tile.
-    -> Bool -- ^ Can the two tiles be added?
+canAdd :: Tile -> Tile -> Bool
 canAdd (Tile a) (Tile b) =
     (a == 1 && b == 2) ||
     (a == 2 && b == 1) ||
@@ -46,8 +42,7 @@ canAdd (Tile a) (Tile b) =
     >>> render (Tile 1)
     "1"
 -}
-render :: Tile -- ^ The tile.
-    -> String -- ^ A human-readable string representation.
+render :: Tile -> String
 render = show . value
 
 {- |
@@ -56,8 +51,7 @@ render = show . value
     >>> score (Tile 6)
     9
 -}
-score :: Tile -- ^ The tile.
-    -> Int -- ^ The score.
+score :: Tile -> Int
 score (Tile n) = if n < 3
     then 0
     else 3 ^ (n `div` 3)
