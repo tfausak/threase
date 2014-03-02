@@ -2,6 +2,7 @@ module Main (main) where
 
 import           Criterion.Main      (bgroup, defaultMain)
 import qualified Threase.BoardBench
+import qualified Threase.GameBench
 import qualified Threase.TileBench
 import qualified Threase.VectorBench
 import qualified ThreaseBench
@@ -13,5 +14,6 @@ main = defaultMain
     , bgroup "Threase.Tile" Threase.TileBench.benchmarks
     , bgroup "Threase.Vector" Threase.VectorBench.benchmarks
     , bgroup "Threase.Board" Threase.BoardBench.benchmarks
+    , bgroup "Threase.Game" Threase.GameBench.benchmarks
     -- , bgroup "X.X.X" X.X.XBench.benchmarks
     ]

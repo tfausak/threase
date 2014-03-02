@@ -23,6 +23,9 @@ import qualified Threase.Vector as V
     An entire game board. This is just a list of vectors. It's implied, but not
     enforced, that the board has the same number of rows and columns. In other
     words, it should be square.
+
+    >>> board -- Used in examples but annoying to type.
+    Board {vectors = [Vector {tiles = [Nothing,Just (Tile {number = 3})]},Vector {tiles = [Just (Tile {number = 1}),Just (Tile {number = 2})]}]}
 -}
 data Board = Board
     { vectors :: [V.Vector] -- ^ The board's vectors.
