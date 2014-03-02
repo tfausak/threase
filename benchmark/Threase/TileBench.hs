@@ -5,8 +5,10 @@ import           Threase.Tile
 
 benchmarks :: [Benchmark]
 benchmarks =
-    [ bench "add" $ whnf (add (Tile 3)) (Tile 3)
-    , bench "canAdd" $ whnf (canAdd (Tile 3)) (Tile 3)
-    , bench "render" $ whnf render (Tile 3)
-    , bench "score" $ whnf score (Tile 3)
+    [ bench "add" $ whnf (add tile) tile
+    , bench "canAdd" $ whnf (canAdd tile) tile
+    , bench "render" $ whnf render tile
+    , bench "score" $ whnf score tile
     ]
+  where
+    tile = Tile 3
