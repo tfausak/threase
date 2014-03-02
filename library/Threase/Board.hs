@@ -25,7 +25,7 @@ import qualified Threase.Vector as V
     words, it should be square.
 -}
 data Board = Board
-    { rows :: [V.Vector] -- ^ The board's rows.
+    { vectors :: [V.Vector] -- ^ The board's vectors.
     } deriving (Eq, Show)
 
 {- |
@@ -35,7 +35,7 @@ data Board = Board
     True
 -}
 canShift :: Board -> Bool
-canShift = any V.canShift . rows
+canShift = any V.canShift . vectors
 
 {- |
     Renders a board.
@@ -44,7 +44,7 @@ canShift = any V.canShift . rows
     "-\t3\n1\t2\n"
 -}
 render :: Board -> String
-render = unlines . fmap V.render . rows
+render = unlines . fmap V.render . vectors
 
 {- |
     Generates rotated boards from a board.
@@ -56,7 +56,7 @@ rotations :: Board -> [Board]
 rotations = take 4 . iterate rotate
   where
     rotate = fromLists . fmap reverse . transpose . toLists
-    toLists = fmap V.tiles . rows
+    toLists = fmap V.tiles . vectors
     fromLists = Board . fmap V.Vector
 
 {- |
@@ -67,7 +67,7 @@ rotations = take 4 . iterate rotate
     3
 -}
 score :: Board -> Int
-score = sum . fmap V.score . rows
+score = sum . fmap V.score . vectors
 
 {- |
     Shifts all the vectors in a board.
@@ -76,4 +76,4 @@ score = sum . fmap V.score . rows
     "3\t-\n3\t-\n"
 -}
 shift :: Board -> Board
-shift = Board . fmap V.shift . rows
+shift = Board . fmap V.shift . vectors
