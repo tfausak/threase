@@ -4,23 +4,52 @@ module Threase.Board (Board (..), canShift, render, rotations, score, shift) whe
 import           Data.List      (transpose)
 import qualified Threase.Vector as V
 
--- | A board of tiles.
+{- $setup
+    >>> import qualified Threase.Tile as T
+    >>> :{
+        let board = Board
+            [ V.Vector [Nothing, Just (T.Tile 3)]
+            , V.Vector [Just (T.Tile 1), Just (T.Tile 2)]
+            ]
+    :}
+-}
+
+{- |
+    A board of tiles.
+
+    >>> board -- Used in examples but annoying to write out.
+    Board {rows = [Vector {tiles = [Nothing,Just (Tile {value = 3})]},Vector {tiles = [Just (Tile {value = 1}),Just (Tile {value = 2})]}]}
+-}
 data Board = Board
     { rows :: [V.Vector] -- ^ The rows of the board.
     } deriving (Eq, Show)
 
-{- | Tells if the board can be shifted. A board can be shifted if any of its
-vectors can be shifted. -}
+{- |
+    Determines if a board can be shifted.
+
+    >>> canShift board
+    True
+-}
 canShift :: Board -- ^ The board.
     -> Bool -- ^ Can the board be shifted?
 canShift = any V.canShift . rows
 
--- | Render the board in a human-readable format.
+{- |
+    Renders a board.
+
+    >>> render board
+    "-\t3\n1\t2\n"
+-}
 render :: Board -- ^ The board.
     -> String -- ^ A human-readable representation.
 render = unlines . fmap V.render . rows
 
--- | Generate all the boards that can be made by rotating the board.
+{- |
+    Generates rotated boards from a board.
+
+    >>> map render (rotations board)
+    ["-\t3\n1\t2\n","1\t-\n2\t3\n","2\t1\n3\t-\n","3\t2\n-\t1\n"]
+-}
 rotations :: Board -- ^ The input board.
     -> [Board] -- ^ The rotated boards.
 rotations = take 4 . iterate rotate
@@ -29,12 +58,23 @@ rotations = take 4 . iterate rotate
     toLists = fmap V.tiles . rows
     fromLists = Board . fmap V.Vector
 
--- | Calculate the score of a board by summing the scores of the vectors.
+{- |
+    Calculates the score of a board, which is the sum of the scores of its
+    vectors.
+
+    >>> score board
+    3
+-}
 score :: Board -- ^ The board.
     -> Int -- ^ The score.
 score = sum . fmap V.score . rows
 
--- | Shift all of a board's vectors.
+{- |
+    Shifts all the vectors in a board.
+
+    >>> render (shift board)
+    "3\t-\n3\t-\n"
+-}
 shift :: Board -- ^ The input board.
     -> Board -- ^ The shifted board.
 shift = Board . fmap V.shift . rows

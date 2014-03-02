@@ -11,7 +11,12 @@ data Vector = Vector
     { tiles :: [Maybe T.Tile] -- ^ The tiles in this row or column.
     } deriving (Eq, Show)
 
--- | Can a vector be shifted?
+{- |
+    Determines if a vector can be shifted.
+
+    >>> canShift (Vector [Nothing, Just (T.Tile 3)])
+    True
+-}
 canShift :: Vector -- ^ The vector.
     -> Bool -- ^ Can it be shifted?
 canShift = go . tiles
@@ -21,19 +26,44 @@ canShift = go . tiles
         T.canAdd a b || canShift (Vector (b' : rest))
     go _ = False
 
--- | Render the vector in a human-readable format.
+{- |
+    Renders a vector.
+
+    >>> render (Vector [Nothing, Just (T.Tile 3)])
+    "-\t3"
+-}
 render :: Vector -- ^ The vector.
     -> String -- ^ A human-readable representation.
 render = intercalate "\t" . fmap (maybe "-" T.render) . tiles
 
-{- | Calculate the score for a vector. The score is the sum of the scores of
-the tiles. -}
+{- |
+    Calculates a vector's score, which is the sum of the scores of its tiles.
+
+    >>> score (Vector [Nothing, Just (T.Tile 6)])
+    9
+-}
 score :: Vector -- ^ The input vector.
     -> Int -- ^ The vector's score.
 score = sum . fmap T.score . catMaybes . tiles
 
-{- | Simulate a swipe and try to shift this vector. Moves tiles toward the head
-of the list. -}
+{- |
+    Moves the tiles in a vector toward the head. Keeps the size of the vector
+    constant by filling in the last element with @Nothing@.
+
+    >>> shift (Vector [Nothing, Just (T.Tile 3)])
+    Vector {tiles = [Just (Tile {value = 3}),Nothing]}
+
+    If the vector can't be shifted (i.e., 'canShift' is @False@), this just
+    returns the vector.
+
+    >>> shift (Vector [Just (T.Tile 3)])
+    Vector {tiles = [Just (Tile {value = 3})]}
+
+    This will add tiles if they can be added.
+
+    >>> shift (Vector [Just (T.Tile 1), Just (T.Tile 2)])
+    Vector {tiles = [Just (Tile {value = 3}),Nothing]}
+-}
 shift :: Vector -- ^ The vector.
     -> Vector -- ^ The shifted vector.
 shift v = go (tiles v)
