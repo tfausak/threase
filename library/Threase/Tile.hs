@@ -10,14 +10,14 @@ module Threase.Tile (Tile (..), add, canAdd, render, score) where
     name, number, and some animations. We're only concerned with the number.
 -}
 data Tile = Tile
-    { value :: Int -- ^ The tile's number.
+    { number :: Int -- ^ The tile's number.
     } deriving (Eq, Show)
 
 {- |
     Adds two tiles.
 
     >>> add (Tile 1) (Tile 2)
-    Tile {value = 3}
+    Tile {number = 3}
 
     Note that this will add them even if they can't be added (i.e., 'canAdd'
     is @False@).
@@ -26,7 +26,7 @@ data Tile = Tile
     >>> canAdd t t
     False
     >>> add t t
-    Tile {value = 2}
+    Tile {number = 2}
 -}
 add :: Tile -> Tile -> Tile
 add (Tile a) (Tile b) = Tile (a + b)
@@ -50,7 +50,7 @@ canAdd (Tile a) (Tile b) =
     "1"
 -}
 render :: Tile -> String
-render = show . value
+render = show . number
 
 {- |
     Calculates a tile's score.

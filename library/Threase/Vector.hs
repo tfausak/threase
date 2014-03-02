@@ -56,18 +56,18 @@ score = sum . fmap T.score . catMaybes . tiles
     constant by filling in the last element with @Nothing@.
 
     >>> shift (Vector [Nothing, Just (T.Tile 3)])
-    Vector {tiles = [Just (Tile {value = 3}),Nothing]}
+    Vector {tiles = [Just (Tile {number = 3}),Nothing]}
 
     If the vector can't be shifted (i.e., 'canShift' is @False@), this just
     returns the vector.
 
     >>> shift (Vector [Just (T.Tile 3)])
-    Vector {tiles = [Just (Tile {value = 3})]}
+    Vector {tiles = [Just (Tile {number = 3})]}
 
     This will add tiles if they can be added.
 
     >>> shift (Vector [Just (T.Tile 1), Just (T.Tile 2)])
-    Vector {tiles = [Just (Tile {value = 3}),Nothing]}
+    Vector {tiles = [Just (Tile {number = 3}),Nothing]}
 -}
 shift :: Vector -> Vector
 shift v = go (tiles v)

@@ -55,7 +55,7 @@ spec = do
             \ a b -> canAdd (Tile a) (Tile b) == canAdd (Tile b) (Tile a)
 
     describe "render" $ do
-        prop "returns the value as a string" $
+        prop "returns the number as a string" $
             \ n -> render (Tile n) == show n
 
     describe "score" $ do
@@ -74,6 +74,6 @@ spec = do
         prop "returns 3 ^ (n / 3)" $
             \ n -> n < 3 || score (Tile n) == 3 ^ (n `div` 3)
 
-    describe "value" $ do
-        prop "returns the tile's value" $
-            \ n -> value (Tile n) == n
+    describe "number" $ do
+        prop "returns the tile's number" $
+            \ n -> number (Tile n) == n
