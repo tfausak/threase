@@ -1,4 +1,9 @@
--- | Types and tools for working with linear arrays of tiles.
+{- |
+    Vectors are the main interface for the game. Each vector can be considered
+    independently. The can be rendered and scored ('render' and 'score',
+    respectively) like tiles. They can also be shifted ('shift' and 'canShift')
+    toward the head (left).
+-}
 module Threase.Vector (Vector (..), canShift, render, score, shift) where
 
 import           Data.List    (intercalate)
@@ -6,9 +11,12 @@ import           Data.Maybe   (catMaybes)
 import           Data.Monoid  ((<>))
 import qualified Threase.Tile as T
 
--- | A row or column of tiles.
+{- |
+    A single row or column. This is just a list of tiles. Unoccupied positions
+    are represented by @Nothing@.
+-}
 data Vector = Vector
-    { tiles :: [Maybe T.Tile] -- ^ The tiles in this row or column.
+    { tiles :: [Maybe T.Tile] -- ^ The vector's tiles.
     } deriving (Eq, Show)
 
 {- |

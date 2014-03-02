@@ -1,4 +1,9 @@
--- | Types and tools for working with the entire Threes board.
+{- |
+    Boards are what you see when you play the game. A board can do anything a
+    vector can do since it's just a collection of them. In the game, you can
+    shift the board in four different directions. To achieve that, rotate the
+    board first, then shift it.
+-}
 module Threase.Board (Board (..), canShift, render, rotations, score, shift) where
 
 import           Data.List      (transpose)
@@ -15,13 +20,12 @@ import qualified Threase.Vector as V
 -}
 
 {- |
-    A board of tiles.
-
-    >>> board -- Used in examples but annoying to write out.
-    Board {rows = [Vector {tiles = [Nothing,Just (Tile {value = 3})]},Vector {tiles = [Just (Tile {value = 1}),Just (Tile {value = 2})]}]}
+    An entire game board. This is just a list of vectors. It's implied, but not
+    enforced, that the board has the same number of rows and columns. In other
+    words, it should be square.
 -}
 data Board = Board
-    { rows :: [V.Vector] -- ^ The rows of the board.
+    { rows :: [V.Vector] -- ^ The board's rows.
     } deriving (Eq, Show)
 
 {- |

@@ -1,4 +1,4 @@
--- | Plays Threes with ease.
+-- | Plays <http://asherv.com/threes/ Threes> with ease.
 module Threase (module Threase) where
 
 import           Threase.Board  as Threase

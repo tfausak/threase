@@ -1,9 +1,16 @@
--- | Exports Tile data type and functions for manipulating it.
+{- |
+    Tiles are the basis for the rest of the game. They can be added together
+    (see 'add' and 'canAdd'), scored ('score'), and rendered ('render'). A
+    typical Threes board has 16 tiles.
+-}
 module Threase.Tile (Tile (..), add, canAdd, render, score) where
 
--- | Represents a tile on the board.
+{- |
+    A single tile. In the game they have a lot of properties, including color,
+    name, number, and some animations. We're only concerned with the number.
+-}
 data Tile = Tile
-    { value :: Int -- ^ The number on the face of the tile.
+    { value :: Int -- ^ The tile's number.
     } deriving (Eq, Show)
 
 {- |
