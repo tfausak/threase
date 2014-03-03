@@ -14,4 +14,4 @@ data Direction
     | South
     | East
     | North
-    deriving (Enum, Eq, Show)
+    deriving (Bounded, Enum, Eq, Show)

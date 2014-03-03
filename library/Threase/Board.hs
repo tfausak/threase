@@ -4,10 +4,12 @@
     shift the board in four different directions. To achieve that, rotate the
     board first, then shift it.
 -}
-module Threase.Board (Board (..), canShift, render, rotate, rotations, score, shift) where
+module Threase.Board (Board (..), canShift, move, render, rotate, rotations,
+    score, shift) where
 
-import           Data.List      (transpose)
-import qualified Threase.Vector as V
+import           Data.List         (transpose)
+import           Threase.Direction
+import qualified Threase.Vector    as V
 
 {- $setup
     >>> import qualified Threase.Tile as T
@@ -39,6 +41,22 @@ data Board = Board
 -}
 canShift :: Board -> Bool
 canShift = any V.canShift . vectors
+
+{- |
+    Moves a board in a direction. This is how the user interacts with the
+    board. For instance, swiping to the left is the same as moving to the west.
+
+    >>> render (move board East)
+    "-\t3\n-\t3\n"
+-}
+move :: Board -> Direction -> Board
+move b d = b'
+  where
+    n = fromEnum d
+    k = fromEnum (maxBound :: Direction)
+    bs = rotations b
+    bs' = rotations (shift (bs !! n))
+    b' = bs' !! (k + 1 - n)
 
 {- |
     Renders a board.

@@ -3,6 +3,7 @@ module Threase.BoardSpec (spec) where
 import           Test.Hspec
 import           Test.Hspec.QuickCheck
 import           Threase.Board
+import           Threase.Direction
 import           Threase.Tile          (Tile (..))
 import           Threase.Vector        (Vector (..))
 
@@ -29,6 +30,16 @@ spec = do
                 v' = Vector [n, t, n, n]
                 b = Board [v, v, v, v']
             canShift b `shouldBe` True
+
+    describe "move" $ do
+        it "returns the moved board" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                v = Vector [t, n, n, n]
+                b = Board (replicate 4 v)
+                v' = Vector [n, t, n, n]
+                b' = Board (replicate 4 v')
+            move b East `shouldBe` b'
 
     describe "render" $ do
         it "returns the rendered vectors joined by newlines" $ do

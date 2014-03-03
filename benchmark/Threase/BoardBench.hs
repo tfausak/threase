@@ -2,12 +2,14 @@ module Threase.BoardBench (benchmarks) where
 
 import           Criterion
 import           Threase.Board
-import qualified Threase.Tile   as T
-import qualified Threase.Vector as V
+import           Threase.Direction
+import qualified Threase.Tile      as T
+import qualified Threase.Vector    as V
 
 benchmarks :: [Benchmark]
 benchmarks =
     [ bench "canShift" $ whnf canShift board
+    , bench "move" $ whnf (move board) East
     , bench "render" $ whnf render board
     , bench "rotate" $ whnf rotate board
     , bench "rotations" $ whnf rotations board
