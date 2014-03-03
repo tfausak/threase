@@ -48,7 +48,11 @@ data Game = Game
     True
 -}
 quality :: Game -> Int
-quality g = score + moves - duplicates
+quality g = sum
+    [ 1 * score
+    , 1 * moves
+    , -1 * duplicates
+    ]
   where
     b = board g
     score = B.score b
