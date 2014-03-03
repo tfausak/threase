@@ -30,3 +30,14 @@ spec = do
                 b = B.Board (replicate 4 v)
                 g = Game b
             isOver g `shouldBe` False
+
+    describe "quality" $ do
+        it "considers the score" $ do
+            let g1 = Game (B.Board [V.Vector [Nothing]])
+                g2 = Game (B.Board [V.Vector [Just (T.Tile 3)]])
+            quality g2 `shouldSatisfy` (> quality g1)
+
+        it "considers the available moves" $ do
+            let g1 = Game (B.Board [V.Vector [Nothing, Nothing]])
+                g2 = Game (B.Board [V.Vector [Nothing, Just (T.Tile 1)]])
+            quality g2 `shouldSatisfy` (> quality g1)
