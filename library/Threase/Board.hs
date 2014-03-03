@@ -4,8 +4,8 @@
     shift the board in four different directions. To achieve that, rotate the
     board first, then shift it.
 -}
-module Threase.Board (Board (..), canShift, move, render, rotate, rotations,
-    score, shift) where
+module Threase.Board (Board (..), canShift, move, render, rotate, rotateTo,
+    rotations, score, shift) where
 
 import           Data.List         (transpose)
 import           Threase.Direction
@@ -50,13 +50,9 @@ canShift = any V.canShift . vectors
     "-\t3\n-\t3\n"
 -}
 move :: Board -> Direction -> Board
-move b d = b'
+move b d = rotateTo (shift (rotateTo b d)) d'
   where
-    n = fromEnum d
-    k = fromEnum (maxBound :: Direction)
-    bs = rotations b
-    bs' = rotations (shift (bs !! n))
-    b' = bs' !! (k + 1 - n)
+    d' = toEnum (fromEnum (maxBound :: Direction) + 1 - fromEnum d)
 
 {- |
     Renders a board.
@@ -80,6 +76,16 @@ rotate = fromLists . fmap reverse . transpose . toLists
     fromLists = Board . fmap V.Vector
 
 {- |
+    Rotates a board to a direction. After rotating, left will correspond to the
+    given direction. (By default, left is West.)
+
+    >>> render (board `rotateTo` East)
+    "2\t1\n3\t-\n"
+-}
+rotateTo :: Board -> Direction -> Board
+rotateTo b d = rotations b !! fromEnum d
+
+{- |
     Generates rotated boards from a board. This is done by iteration 'rotate',
     so the boards are rotated clockwise.
 
@@ -87,7 +93,9 @@ rotate = fromLists . fmap reverse . transpose . toLists
     ["-\t3\n1\t2\n","1\t-\n2\t3\n","2\t1\n3\t-\n","3\t2\n-\t1\n"]
 -}
 rotations :: Board -> [Board]
-rotations = take 4 . iterate rotate
+rotations = take n . iterate rotate
+  where
+    n = 1 + fromEnum (maxBound :: Direction)
 
 {- |
     Calculates the score of a board, which is the sum of the scores of its

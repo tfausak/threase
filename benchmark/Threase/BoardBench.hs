@@ -12,6 +12,7 @@ benchmarks =
     , bench "move" $ whnf (move board) East
     , bench "render" $ whnf render board
     , bench "rotate" $ whnf rotate board
+    , bench "rotateTo" $ whnf (rotateTo board) East
     , bench "rotations" $ whnf rotations board
     , bench "score" $ whnf score board
     , bench "shift" $ whnf shift board

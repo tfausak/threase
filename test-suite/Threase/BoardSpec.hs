@@ -56,6 +56,14 @@ spec = do
                 b' = Board [Vector [n, n], Vector [t, n]]
             rotate b `shouldBe` b'
 
+    describe "rotateTo" $ do
+        it "returns the rotated board" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                b = Board [Vector [n, n], Vector [n, t]]
+                b' = Board [Vector [t, n], Vector [n, n]]
+            (b `rotateTo` East) `shouldBe` b'
+
     describe "rotations" $ do
         it "returns the rotations in clockwise order" $ do
             let n = Nothing
