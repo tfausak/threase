@@ -1,39 +1,39 @@
 module Threase.GameBench (benchmarks) where
 
 import           Criterion
-import qualified Threase.Board  as B
+import           Threase.Board  (Board (..))
 import           Threase.Game
-import qualified Threase.Tile   as T
-import qualified Threase.Vector as V
+import           Threase.Tile   (Tile (..))
+import           Threase.Vector (Vector (..))
 
 benchmarks :: [Benchmark]
 benchmarks =
     [ bench "quality" $ whnf quality game
     ]
   where
-    game = Game $ B.Board
-        [ V.Vector
+    game = Game $ Board
+        [ Vector
             [ Nothing
-            , Just (T.Tile 1)
-            , Just (T.Tile 2)
-            , Just (T.Tile 3)
+            , Just (Tile 1)
+            , Just (Tile 2)
+            , Just (Tile 3)
             ]
-        , V.Vector
-            [ Just (T.Tile (3 * 2 ^ 1))
-            , Just (T.Tile (3 * 2 ^ 2))
-            , Just (T.Tile (3 * 2 ^ 3))
-            , Just (T.Tile (3 * 2 ^ 4))
+        , Vector
+            [ Just (Tile (3 * 2 ^ 1))
+            , Just (Tile (3 * 2 ^ 2))
+            , Just (Tile (3 * 2 ^ 3))
+            , Just (Tile (3 * 2 ^ 4))
             ]
-        , V.Vector
-            [ Just (T.Tile (3 * 2 ^ 5))
-            , Just (T.Tile (3 * 2 ^ 6))
-            , Just (T.Tile (3 * 2 ^ 7))
-            , Just (T.Tile (3 * 2 ^ 8))
+        , Vector
+            [ Just (Tile (3 * 2 ^ 5))
+            , Just (Tile (3 * 2 ^ 6))
+            , Just (Tile (3 * 2 ^ 7))
+            , Just (Tile (3 * 2 ^ 8))
             ]
-        , V.Vector
-            [ Just (T.Tile (3 * 2 ^ 9))
-            , Just (T.Tile (3 * 2 ^ 10))
-            , Just (T.Tile (3 * 2 ^ 11))
+        , Vector
+            [ Just (Tile (3 * 2 ^ 9))
+            , Just (Tile (3 * 2 ^ 10))
+            , Just (Tile (3 * 2 ^ 11))
             , Nothing
             ]
         ]

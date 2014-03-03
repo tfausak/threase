@@ -1,7 +1,7 @@
 module Threase.VectorBench (benchmarks) where
 
 import           Criterion
-import qualified Threase.Tile   as T
+import           Threase.Tile   (Tile (..))
 import           Threase.Vector
 
 benchmarks :: [Benchmark]
@@ -13,8 +13,8 @@ benchmarks =
     ]
   where
     vector = Vector
-        [ Just (T.Tile 1)
-        , Just (T.Tile 2)
+        [ Just (Tile 1)
+        , Just (Tile 2)
         , Nothing
-        , Just (T.Tile 3)
+        , Just (Tile 3)
         ]
