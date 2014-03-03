@@ -9,6 +9,16 @@ import           Threase.Vector        (Vector (..))
 
 spec :: Spec
 spec = do
+    describe "canMove" $ do
+        it "" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                b = Board [Vector [n, n] , Vector [n, t]]
+            (b `canMove` West) `shouldBe` True
+            (b `canMove` South) `shouldBe` False
+            (b `canMove` East) `shouldBe` False
+            (b `canMove` North) `shouldBe` True
+
     describe "canShift" $ do
         it "returns False for an empty board" $ do
             let t = Nothing

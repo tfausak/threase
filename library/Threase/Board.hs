@@ -4,8 +4,8 @@
     shift the board in four different directions. To achieve that, rotate the
     board first, then shift it.
 -}
-module Threase.Board (Board (..), canShift, move, render, rotate, rotateTo,
-    rotations, score, shift) where
+module Threase.Board (Board (..), canMove, canShift, move, render, rotate,
+    rotateTo, rotations, score, shift) where
 
 import           Data.List         (transpose)
 import           Threase.Direction
@@ -32,6 +32,15 @@ import qualified Threase.Vector    as V
 data Board = Board
     { vectors :: [V.Vector] -- ^ The board's vectors.
     } deriving (Eq, Show)
+
+{- |
+    Determines if a board can be moved in a direction.
+
+    >>> board `canMove` East
+    True
+-}
+canMove :: Board -> Direction -> Bool
+canMove b d = canShift (b `rotateTo` d)
 
 {- |
     Determines if a board can be shifted.

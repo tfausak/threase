@@ -8,7 +8,8 @@ import qualified Threase.Vector    as V
 
 benchmarks :: [Benchmark]
 benchmarks =
-    [ bench "canShift" $ whnf canShift board
+    [ bench "canMove" $ whnf (canMove board) East
+    , bench "canShift" $ whnf canShift board
     , bench "move" $ whnf (move board) East
     , bench "render" $ whnf render board
     , bench "rotate" $ whnf rotate board
