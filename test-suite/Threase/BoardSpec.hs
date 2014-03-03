@@ -37,6 +37,14 @@ spec = do
                 b = Board [Vector [n, n], Vector [n, t]]
             render b `shouldBe` "-\t-\n-\t1\n"
 
+    describe "rotate" $ do
+        it "returns the board rotated clockwise" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                b = Board [Vector [n, n], Vector [n, t]]
+                b' = Board [Vector [n, n], Vector [t, n]]
+            rotate b `shouldBe` b'
+
     describe "rotations" $ do
         it "returns the rotations in clockwise order" $ do
             let n = Nothing

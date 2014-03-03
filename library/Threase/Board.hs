@@ -4,7 +4,7 @@
     shift the board in four different directions. To achieve that, rotate the
     board first, then shift it.
 -}
-module Threase.Board (Board (..), canShift, render, rotations, score, shift) where
+module Threase.Board (Board (..), canShift, render, rotate, rotations, score, shift) where
 
 import           Data.List      (transpose)
 import qualified Threase.Vector as V
@@ -50,17 +50,26 @@ render :: Board -> String
 render = unlines . fmap V.render . vectors
 
 {- |
-    Generates rotated boards from a board.
+    Rotates a board 90 degrees clockwise.
+
+    >>> render (rotate board)
+    "1\t-\n2\t3\n"
+-}
+rotate :: Board -> Board
+rotate = fromLists . fmap reverse . transpose . toLists
+  where
+    toLists = fmap V.tiles . vectors
+    fromLists = Board . fmap V.Vector
+
+{- |
+    Generates rotated boards from a board. This is done by iteration 'rotate',
+    so the boards are rotated clockwise.
 
     >>> map render (rotations board)
     ["-\t3\n1\t2\n","1\t-\n2\t3\n","2\t1\n3\t-\n","3\t2\n-\t1\n"]
 -}
 rotations :: Board -> [Board]
 rotations = take 4 . iterate rotate
-  where
-    rotate = fromLists . fmap reverse . transpose . toLists
-    toLists = fmap V.tiles . vectors
-    fromLists = Board . fmap V.Vector
 
 {- |
     Calculates the score of a board, which is the sum of the scores of its

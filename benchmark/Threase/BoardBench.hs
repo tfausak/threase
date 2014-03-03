@@ -9,6 +9,7 @@ benchmarks :: [Benchmark]
 benchmarks =
     [ bench "canShift" $ whnf canShift board
     , bench "render" $ whnf render board
+    , bench "rotate" $ whnf rotate board
     , bench "rotations" $ whnf rotations board
     , bench "score" $ whnf score board
     , bench "shift" $ whnf shift board
