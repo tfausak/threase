@@ -2,7 +2,7 @@ module Threase.BoardSpec (spec) where
 
 import           Test.Hspec
 import           Threase.Board
-import           Threase.Direction
+import           Threase.Direction (Direction (..))
 import           Threase.Tile      (Tile (..))
 import           Threase.Vector    (Vector (..))
 

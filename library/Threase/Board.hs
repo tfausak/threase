@@ -8,7 +8,7 @@ module Threase.Board (Board (..), canMove, canShift, isOver, move, render,
     rotate, rotateTo, rotations, score, shift) where
 
 import           Data.List         (transpose)
-import           Threase.Direction
+import           Threase.Direction (Direction (..))
 import qualified Threase.Vector    as V
 
 {- $setup
