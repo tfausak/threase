@@ -28,9 +28,10 @@ data Vector = Vector
 canShift :: Vector -> Bool
 canShift = go . tiles
   where
-    go (Nothing : _) = True
     go (Just a : b'@(Just b) : rest) =
         T.canAdd a b || canShift (Vector (b' : rest))
+    go (Nothing : Just _ : _) = True
+    go (_ : rest) = canShift (Vector rest)
     go _ = False
 
 {- |

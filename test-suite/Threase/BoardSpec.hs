@@ -10,11 +10,11 @@ import           Threase.Vector        (Vector (..))
 spec :: Spec
 spec = do
     describe "canShift" $ do
-        it "returns True for an empty board" $ do
+        it "returns False for an empty board" $ do
             let t = Nothing
                 v = Vector (replicate 4 t)
                 b = Board (replicate 4 v)
-            canShift b `shouldBe` True
+            canShift b `shouldBe` False
 
         it "returns False if none of the vectors can be shifted" $ do
             let n = Nothing

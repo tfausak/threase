@@ -7,9 +7,9 @@ import           Threase.Vector
 spec :: Spec
 spec = do
     describe "canShift" $ do
-        it "returns true for an empty vector" $ do
+        it "returns false for an empty vector" $ do
             let v = Vector [Nothing, Nothing, Nothing, Nothing]
-            canShift v `shouldBe` True
+            canShift v `shouldBe` False
 
         it "returns false with a tile at the head" $ do
             let t = Just (Tile 1)
@@ -18,7 +18,12 @@ spec = do
 
         it "returns true with a tile not at the head" $ do
             let t = Just (Tile 1)
-                v = Vector [Nothing, t, Nothing, Nothing]
+                v = Vector [Nothing, Nothing, Nothing, t]
+            canShift v `shouldBe` True
+
+        it "returns true with a tile at the head and another elsewhere" $ do
+            let t = Just (Tile 1)
+                v = Vector [t, Nothing, t, Nothing]
             canShift v `shouldBe` True
 
         it "returns true with addable tiles" $ do

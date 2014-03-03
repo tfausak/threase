@@ -9,12 +9,12 @@ import qualified Threase.Vector as V
 spec :: Spec
 spec = do
     describe "isOver" $ do
-        it "returns False for an empty board" $ do
+        it "returns True for an empty board" $ do
             let t = Nothing
                 v = V.Vector (replicate 4 t)
                 b = B.Board (replicate 4 v)
                 g = Game b
-            isOver g `shouldBe` False
+            isOver g `shouldBe` True
 
         it "returns True if none of the rotations can be shifted" $ do
             let t = Just (T.Tile 1)
