@@ -8,8 +8,7 @@ import qualified Threase.Vector as V
 
 benchmarks :: [Benchmark]
 benchmarks =
-    [ bench "isOver" $ whnf isOver game
-    , bench "quality" $ whnf quality game
+    [ bench "quality" $ whnf quality game
     ]
   where
     game = Game $ B.Board

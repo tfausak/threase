@@ -10,6 +10,7 @@ benchmarks :: [Benchmark]
 benchmarks =
     [ bench "canMove" $ whnf (canMove board) East
     , bench "canShift" $ whnf canShift board
+    , bench "isOver" $ whnf isOver board
     , bench "move" $ whnf (move board) East
     , bench "render" $ whnf render board
     , bench "rotate" $ whnf rotate board

@@ -3,7 +3,7 @@
     have other properties that we don't (yet) care about, including number of
     turns and the hint about the next tile.
 -}
-module Threase.Game (Game (..), isOver, quality) where
+module Threase.Game (Game (..), quality) where
 
 import qualified Threase.Board as B
 
@@ -27,16 +27,6 @@ import qualified Threase.Board as B
 data Game = Game
     { board :: B.Board -- ^ The game's board.
     } deriving (Eq, Show)
-
-{- |
-    Determines if the game is over. The game is over if the board cannot be
-    shifted in any direction.
-
-    >>> isOver game
-    False
--}
-isOver :: Game -> Bool
-isOver = not . any B.canShift . B.rotations . board
 
 {- |
     Determines the quality of a game. The quality is an arbitrary, subjective

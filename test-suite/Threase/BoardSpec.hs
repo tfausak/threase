@@ -41,6 +41,26 @@ spec = do
                 b = Board [v, v, v, v']
             canShift b `shouldBe` True
 
+    describe "isOver" $ do
+        it "returns True for an empty board" $ do
+            let t = Nothing
+                v = Vector (replicate 4 t)
+                b = Board (replicate 4 v)
+            isOver b `shouldBe` True
+
+        it "returns True if none of the rotations can be shifted" $ do
+            let t = Just (Tile 1)
+                v = Vector (replicate 4 t)
+                b = Board (replicate 4 v)
+            isOver b `shouldBe` True
+
+        it "returns False if any of the vectors can be shifted" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                v = Vector [t, n, n, n]
+                b = Board (replicate 4 v)
+            isOver b `shouldBe` False
+
     describe "move" $ do
         it "returns the moved board" $ do
             let n = Nothing
