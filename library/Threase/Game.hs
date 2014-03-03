@@ -36,4 +36,4 @@ data Game = Game
     False
 -}
 isOver :: Game -> Bool
-isOver g = not (any B.canShift (B.rotations (board g)))
+isOver = not . any B.canShift . B.rotations . board
