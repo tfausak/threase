@@ -18,3 +18,8 @@ spec = do
             let g1 = Game (Board [Vector [Nothing, Nothing]])
                 g2 = Game (Board [Vector [Nothing, Just (Tile 1)]])
             quality g2 `shouldSatisfy` (> quality g1)
+
+        it "considers duplicate tiles" $ do
+            let g1 = Game (Board [Vector [Just (Tile 1), Nothing, Just (Tile 1)]])
+                g2 = Game (Board [Vector [Just (Tile 1), Nothing, Just (Tile 2)]])
+            quality g2 `shouldSatisfy` (> quality g1)

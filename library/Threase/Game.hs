@@ -5,11 +5,13 @@
 -}
 module Threase.Game (Game (..), quality) where
 
-import qualified Threase.Board as B
+import           Data.List      (group, sort)
+import           Data.Maybe     (catMaybes)
+import qualified Threase.Board  as B
+import qualified Threase.Tile   as T
+import qualified Threase.Vector as V
 
 {- $setup
-    >>> import qualified Threase.Tile as T
-    >>> import qualified Threase.Vector as V
     >>> :{
         let game = Game $ B.Board
             [ V.Vector [Nothing, Just (T.Tile 3)]
@@ -35,9 +37,10 @@ data Game = Game
     * Score: Higher scores are better.
     * Available moves: Being able to move in every direction is better than not
     being able to move at all.
+    * Duplicate tiles: More is worse.
 
-    The quality will always be positive, but there is no limit. It should be
-    used only to compare the relative quality of games.
+    The quality should be only be used to compare the relative quality of
+    games.
 
     >>> let g1 = Game (B.Board [V.Vector [Nothing]])
     >>> let g2 = Game (B.Board [V.Vector [Just (T.Tile 3)]])
@@ -45,8 +48,13 @@ data Game = Game
     True
 -}
 quality :: Game -> Int
-quality g = score + moves
+quality g = score + moves - duplicates
   where
     b = board g
     score = B.score b
     moves = length (filter B.canShift (B.rotations b))
+    vs = B.vectors b
+    ts = V.tiles =<< vs
+    ns = fmap T.number (catMaybes ts)
+    p = (> 1) . length
+    duplicates = length (filter p (group (sort ns)))
