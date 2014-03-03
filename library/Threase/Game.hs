@@ -5,7 +5,7 @@
 -}
 module Threase.Game (Game (..), quality) where
 
-import           Data.List      (group, sort)
+import           Data.List      (genericLength, group, sort)
 import           Data.Maybe     (catMaybes)
 import qualified Threase.Board  as B
 import qualified Threase.Tile   as T
@@ -47,7 +47,7 @@ data Game = Game
     >>> quality g2 > quality g1
     True
 -}
-quality :: Game -> Int
+quality :: Game -> Integer
 quality g = sum
     [ 1 * score
     , 1 * moves
@@ -56,9 +56,9 @@ quality g = sum
   where
     b = board g
     score = B.score b
-    moves = length (filter B.canShift (B.rotations b))
+    moves = genericLength (filter B.canShift (B.rotations b))
     vs = B.vectors b
     ts = V.tiles =<< vs
     ns = fmap T.number (catMaybes ts)
     p = (> 1) . length
-    duplicates = length (filter p (group (sort ns)))
+    duplicates = genericLength (filter p (group (sort ns)))

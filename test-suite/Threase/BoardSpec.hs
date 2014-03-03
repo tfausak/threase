@@ -1,11 +1,10 @@
 module Threase.BoardSpec (spec) where
 
 import           Test.Hspec
-import           Test.Hspec.QuickCheck
 import           Threase.Board
 import           Threase.Direction
-import           Threase.Tile          (Tile (..))
-import           Threase.Vector        (Vector (..))
+import           Threase.Tile      (Tile (..))
+import           Threase.Vector    (Vector (..))
 
 spec :: Spec
 spec = do
@@ -105,9 +104,6 @@ spec = do
                 , Board [Vector [t, n], Vector [n, n]]
                 , Board [Vector [n, t], Vector [n, n]]
                 ]
-
-        prop "returns 4 boards" $
-            \ n -> length (rotations (Board [Vector [Just (Tile n)]])) == 4
 
     describe "score" $ do
         it "returns 0 for an empty board" $ do

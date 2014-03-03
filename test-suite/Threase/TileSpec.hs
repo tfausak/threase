@@ -1,7 +1,6 @@
 module Threase.TileSpec (spec) where
 
 import           Test.Hspec
-import           Test.Hspec.QuickCheck
 import           Threase.Tile
 
 spec :: Spec
@@ -15,12 +14,6 @@ spec = do
         it "returns 6 for 3 and 3" $ do
             let a = Tile 3
             add a a `shouldBe` Tile 6
-
-        prop "returns the sum of the values" $
-            \ a b -> add (Tile a) (Tile b) == Tile (a + b)
-
-        prop "is commutative" $
-            \ a b -> add (Tile a) (Tile b) == add (Tile b) (Tile a)
 
     describe "canAdd" $ do
         it "returns True for 1 and 2" $ do
@@ -48,15 +41,9 @@ spec = do
                 b = Tile 3
             canAdd a b `shouldBe` True
 
-        prop "returns True for pairs other than 1 and 2" $
-            \ n -> n < 3 || canAdd (Tile n) (Tile n)
-
-        prop "is commutative" $
-            \ a b -> canAdd (Tile a) (Tile b) == canAdd (Tile b) (Tile a)
-
     describe "render" $ do
-        prop "returns the number as a string" $
-            \ n -> render (Tile n) == show n
+        it "returns the number as a string" $ do
+            render (Tile 1) `shouldBe` "1"
 
     describe "score" $ do
         it "returns 0 for 1" $ do
@@ -71,9 +58,6 @@ spec = do
         it "returns 9 for 6" $ do
             score (Tile 6) `shouldBe` 9
 
-        prop "returns 3 ^ (n / 3)" $
-            \ n -> n < 3 || score (Tile n) == 3 ^ (n `div` 3)
-
     describe "number" $ do
-        prop "returns the tile's number" $
-            \ n -> number (Tile n) == n
+        it "returns the tile's number" $ do
+            number (Tile 1) `shouldBe` 1

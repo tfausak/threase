@@ -58,7 +58,7 @@ render = show . number
     >>> score (Tile 6)
     9
 -}
-score :: Tile -> Int
+score :: Tile -> Integer
 score (Tile n) = if n < 3
     then 0
     else 3 ^ (n `div` 3)
