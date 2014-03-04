@@ -51,7 +51,7 @@ quality :: Game -> Integer
 quality g = sum
     [ 1 * score
     , 1 * moves
-    , -1 * duplicates
+    , 1 * (genericLength ns - duplicates)
     ]
   where
     b = board g
