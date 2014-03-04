@@ -13,10 +13,13 @@ import qualified Threase.Vector as V
 
 {- $setup
     >>> :{
-        let game = Game $ B.Board
-            [ V.Vector [Nothing, Just (T.Tile 3)]
-            , V.Vector [Just (T.Tile 1), Just (T.Tile 2)]
-            ]
+        let game = Game
+            { board = B.Board
+                [ V.Vector [Nothing, Just (T.Tile 3)]
+                , V.Vector [Just (T.Tile 1), Just (T.Tile 2)]
+                ]
+            , next = T.Tile 1
+            }
     :}
 -}
 
@@ -24,10 +27,11 @@ import qualified Threase.Vector as V
     A game. Just a wrapper around the board to provide game logic.
 
     >>> game -- Used in examples but annoying to type.
-    Game {board = Board {vectors = [Vector {tiles = [Nothing,Just (Tile {number = 3})]},Vector {tiles = [Just (Tile {number = 1}),Just (Tile {number = 2})]}]}}
+    Game {board = Board {vectors = [Vector {tiles = [Nothing,Just (Tile {number = 3})]},Vector {tiles = [Just (Tile {number = 1}),Just (Tile {number = 2})]}]}, next = Tile {number = 1}}
 -}
 data Game = Game
     { board :: B.Board -- ^ The game's board.
+    , next  :: T.Tile -- ^ The next tile.
     } deriving (Eq, Show)
 
 {- |
@@ -42,14 +46,12 @@ data Game = Game
     The quality should be only be used to compare the relative quality of
     games.
 
-    >>> let g1 = Game (B.Board [V.Vector [Nothing, Just (T.Tile 1)]])
-    >>> let g2 = Game (B.Board [V.Vector [Nothing, Just (T.Tile 3)]])
-    >>> quality g2 > quality g1
+    >>> quality game > 0
     True
 -}
 quality :: Game -> Integer
-quality g@(Game b)
-    | B.isOver b = 0
+quality g
+    | B.isOver (board g) = 0
     | otherwise = sum
         [ 1 * score g
         , 1 * numMoves g
