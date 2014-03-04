@@ -42,29 +42,19 @@ data Game = Game
     The quality should be only be used to compare the relative quality of
     games.
 
-    >>> let g1 = Game (B.Board [V.Vector [Nothing]])
-    >>> let g2 = Game (B.Board [V.Vector [Just (T.Tile 3)]])
+    >>> let g1 = Game (B.Board [V.Vector [Nothing, Just (T.Tile 1)]])
+    >>> let g2 = Game (B.Board [V.Vector [Nothing, Just (T.Tile 3)]])
     >>> quality g2 > quality g1
     True
 -}
 quality :: Game -> Integer
-quality g = sum
-    [ 1 * score g
-    , 1 * numMoves g
-    , 1 * (numTiles g - numDuplicates g)
-    ]
-
-score :: Game -> Integer
-score = B.score . board
-
-numMoves :: Game -> Integer
-numMoves = genericLength . filter B.canShift . B.rotations . board
-
-tiles :: Game -> [Maybe T.Tile]
-tiles = (V.tiles =<<) . B.vectors . board
-
-numTiles :: Game -> Integer
-numTiles = genericLength . tiles
+quality g@(Game b)
+    | B.isOver b = 0
+    | otherwise = sum
+        [ 1 * score g
+        , 1 * numMoves g
+        , 1 * (numTiles g - numDuplicates g)
+        ]
 
 numDuplicates :: Game -> Integer
 numDuplicates g = genericLength (filter p (group ns))
@@ -72,3 +62,15 @@ numDuplicates g = genericLength (filter p (group ns))
     p = (> 1) . length
     ns = sort (fmap T.number ts)
     ts = catMaybes (tiles g)
+
+numMoves :: Game -> Integer
+numMoves = genericLength . filter B.canShift . B.rotations . board
+
+numTiles :: Game -> Integer
+numTiles = genericLength . tiles
+
+score :: Game -> Integer
+score = B.score . board
+
+tiles :: Game -> [Maybe T.Tile]
+tiles = (V.tiles =<<) . B.vectors . board
