@@ -26,13 +26,7 @@ data Vector = Vector
     True
 -}
 canShift :: Vector -> Bool
-canShift = go . tiles
-  where
-    go (Just a : b'@(Just b) : rest) =
-        T.canAdd a b || canShift (Vector (b' : rest))
-    go (Nothing : Just _ : _) = True
-    go (_ : rest) = canShift (Vector rest)
-    go _ = False
+canShift v = shift v /= v
 
 {- |
     Renders a vector.
@@ -71,10 +65,11 @@ score = sum . fmap T.score . catMaybes . tiles
     Vector {tiles = [Just (Tile {number = 3}),Nothing]}
 -}
 shift :: Vector -> Vector
-shift v = go (tiles v)
+shift = Vector . go . tiles
   where
-    go (Nothing : rest) = Vector (rest <> [Nothing])
-    go (Just a : Just b : rest) = if T.canAdd a b
-        then Vector (Just (T.add a b) : rest <> [Nothing])
-        else v
-    go _ = v
+    go (Just a : Just b : ts) = if T.canAdd a b
+        then Just (T.add a b) : ts <> [Nothing]
+        else Just a : go (Just b : ts)
+    go (Nothing : ts) = ts <> [Nothing]
+    go (t : ts) = t : go ts
+    go ts = ts
