@@ -49,16 +49,26 @@ data Game = Game
 -}
 quality :: Game -> Integer
 quality g = sum
-    [ 1 * score
-    , 1 * moves
-    , 1 * (genericLength ns - duplicates)
+    [ 1 * score g
+    , 1 * numMoves g
+    , 1 * (numTiles g - numDuplicates g)
     ]
+
+score :: Game -> Integer
+score = B.score . board
+
+numMoves :: Game -> Integer
+numMoves = genericLength . filter B.canShift . B.rotations . board
+
+tiles :: Game -> [Maybe T.Tile]
+tiles = (V.tiles =<<) . B.vectors . board
+
+numTiles :: Game -> Integer
+numTiles = genericLength . tiles
+
+numDuplicates :: Game -> Integer
+numDuplicates g = genericLength (filter p (group ns))
   where
-    b = board g
-    score = B.score b
-    moves = genericLength (filter B.canShift (B.rotations b))
-    vs = B.vectors b
-    ts = V.tiles =<< vs
-    ns = fmap T.number (catMaybes ts)
     p = (> 1) . length
-    duplicates = genericLength (filter p (group (sort ns)))
+    ns = sort (fmap T.number ts)
+    ts = catMaybes (tiles g)
