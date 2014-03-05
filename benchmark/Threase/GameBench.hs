@@ -9,6 +9,7 @@ import           Threase.Vector (Vector (..))
 benchmarks :: [Benchmark]
 benchmarks =
     [ bench "quality" $ whnf quality game
+    , bench "render" $ whnf render game
     ]
   where
     game = Game

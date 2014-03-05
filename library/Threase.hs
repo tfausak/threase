@@ -1,7 +1,7 @@
 -- | Plays <http://asherv.com/threes/ Threes> with ease.
 module Threase (module Threase) where
 
-import           Threase.Board     as Threase
+import           Threase.Board     as Threase hiding (render)
 import           Threase.Direction as Threase hiding (render)
 import           Threase.Game      as Threase
 import           Threase.Tile      as Threase hiding (render, score)

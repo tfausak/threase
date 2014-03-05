@@ -3,10 +3,11 @@
     have other properties that we don't (yet) care about, including number of
     turns and the hint about the next tile.
 -}
-module Threase.Game (Game (..), quality) where
+module Threase.Game (Game (..), quality, render) where
 
 import           Data.List      (genericLength, group, sort)
 import           Data.Maybe     (catMaybes)
+import           Data.Monoid    ((<>))
 import qualified Threase.Board  as B
 import qualified Threase.Tile   as T
 import qualified Threase.Vector as V
@@ -33,6 +34,20 @@ data Game = Game
     { board :: B.Board -- ^ The game's board.
     , next  :: T.Tile -- ^ The next tile.
     } deriving (Eq, Show)
+
+{- |
+    Renders a game.
+
+    >>> render game
+    "Score: 3\nNext: 1\n-\t3\n1\t2\nQuality: 10\n"
+-}
+render :: Game -> String
+render g = unlines
+    [ "Score: " <> show (score g)
+    , "Next: " <> T.render (next g)
+    , init (B.render (board g))
+    , "Quality: " <> show (quality g)
+    ]
 
 {- |
     Determines the quality of a game. The quality is an arbitrary, subjective

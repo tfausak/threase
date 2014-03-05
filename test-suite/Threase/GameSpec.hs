@@ -63,6 +63,24 @@ spec = do
                     ]
             quality g2 `shouldSatisfy` (> quality g1)
 
+    describe "render" $ do
+        it "returns the rendered board with metadata" $ do
+            let game = g 24
+                    [ [1, 0, 0, 0]
+                    , [0, 2, 0, 0]
+                    , [0, 0, 3, 0]
+                    , [0, 0, 0, 6]
+                    ]
+            render game `shouldBe` unlines
+                [ "Score: 12"
+                , "Next: 24"
+                , "1\t-\t-\t-"
+                , "-\t2\t-\t-"
+                , "-\t-\t3\t-"
+                , "-\t-\t-\t6"
+                , "Quality: 32"
+                ]
+
 t :: Int -> Tile
 t = Tile
 
