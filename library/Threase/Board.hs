@@ -133,7 +133,7 @@ rotations = take n . iterate rotate
     >>> score board
     3
 -}
-score :: Board -> Integer
+score :: Board -> Int
 score = sum . fmap V.score . vectors
 
 {- |

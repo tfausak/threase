@@ -49,7 +49,7 @@ render = intercalate "\t" . fmap (maybe "-" T.render) . tiles
     >>> score (Vector [Nothing, Just (T.Tile 6)])
     9
 -}
-score :: Vector -> Integer
+score :: Vector -> Int
 score = sum . fmap T.score . catMaybes . tiles
 
 {- |

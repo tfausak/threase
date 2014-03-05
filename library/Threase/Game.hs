@@ -9,7 +9,7 @@ module Threase.Game
     , render
     ) where
 
-import           Data.List      (genericLength, group, sort)
+import           Data.List      (group, sort)
 import           Data.Maybe     (catMaybes)
 import           Data.Monoid    ((<>))
 import qualified Threase.Board  as B
@@ -68,7 +68,7 @@ render g = unlines
     >>> quality game > 0
     True
 -}
-quality :: Game -> Integer
+quality :: Game -> Int
 quality g
     | B.isOver (board g) = 0
     | otherwise = sum
@@ -77,20 +77,20 @@ quality g
         , 1 * (numTiles g - numDuplicates g)
         ]
 
-numDuplicates :: Game -> Integer
-numDuplicates g = genericLength (filter p (group ns))
+numDuplicates :: Game -> Int
+numDuplicates g = length (filter p (group ns))
   where
     p = (> 1) . length
     ns = sort (fmap T.number ts)
     ts = catMaybes (tiles g)
 
-numMoves :: Game -> Integer
-numMoves = genericLength . filter B.canShift . B.rotations . board
+numMoves :: Game -> Int
+numMoves = length . filter B.canShift . B.rotations . board
 
-numTiles :: Game -> Integer
-numTiles = genericLength . tiles
+numTiles :: Game -> Int
+numTiles = length . tiles
 
-score :: Game -> Integer
+score :: Game -> Int
 score = B.score . board
 
 tiles :: Game -> [Maybe T.Tile]
