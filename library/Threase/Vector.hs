@@ -4,7 +4,13 @@
     respectively) like tiles. They can also be shifted ('shift' and 'canShift')
     toward the head (left).
 -}
-module Threase.Vector (Vector (..), canShift, render, score, shift) where
+module Threase.Vector
+    ( Vector (..)
+    , canShift
+    , render
+    , score
+    , shift
+    ) where
 
 import           Data.List    (intercalate)
 import           Data.Maybe   (catMaybes)

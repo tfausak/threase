@@ -2,7 +2,10 @@
     The possible directions to move in a game. This is tightly coupled to
     'Board.rotate'.
 -}
-module Threase.Direction (Direction (..), render) where
+module Threase.Direction
+    ( Direction (..)
+    , render
+    ) where
 
 {- |
     A direction the board can be moved in. Represented by the cardinal

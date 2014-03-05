@@ -3,7 +3,11 @@
     have other properties that we don't (yet) care about, including number of
     turns and the hint about the next tile.
 -}
-module Threase.Game (Game (..), quality, render) where
+module Threase.Game
+    ( Game (..)
+    , quality
+    , render
+    ) where
 
 import           Data.List      (genericLength, group, sort)
 import           Data.Maybe     (catMaybes)

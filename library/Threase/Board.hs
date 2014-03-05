@@ -4,8 +4,19 @@
     shift the board in four different directions. To achieve that, rotate the
     board first, then shift it.
 -}
-module Threase.Board (Board (..), canMove, canShift, isOver, move, render,
-    rotate, rotateTo, rotations, score, shift) where
+module Threase.Board
+    ( Board (..)
+    , canMove
+    , canShift
+    , isOver
+    , move
+    , render
+    , rotate
+    , rotateTo
+    , rotations
+    , score
+    , shift
+    ) where
 
 import           Data.List         (transpose)
 import           Threase.Direction (Direction (..))

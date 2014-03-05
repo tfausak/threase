@@ -3,7 +3,13 @@
     (see 'add' and 'canAdd'), scored ('score'), and rendered ('render'). A
     typical Threes board has 16 tiles.
 -}
-module Threase.Tile (Tile (..), add, canAdd, render, score) where
+module Threase.Tile
+    ( Tile (..)
+    , add
+    , canAdd
+    , render
+    , score
+    ) where
 
 {- |
     A single tile. In the game they have a lot of properties, including color,
