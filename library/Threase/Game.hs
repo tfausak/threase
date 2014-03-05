@@ -9,12 +9,13 @@ module Threase.Game
     , render
     ) where
 
-import           Data.List      (group, sort)
-import           Data.Maybe     (catMaybes)
-import           Data.Monoid    ((<>))
-import qualified Threase.Board  as B
-import qualified Threase.Tile   as T
-import qualified Threase.Vector as V
+import           Data.List         (group, sort)
+import           Data.Maybe        (catMaybes)
+import           Data.Monoid       ((<>))
+import qualified Threase.Board     as B
+import qualified Threase.Direction as D
+import qualified Threase.Tile      as T
+import qualified Threase.Vector    as V
 
 {- $setup
     >>> :{
@@ -43,13 +44,14 @@ data Game = Game
     Renders a game.
 
     >>> render game
-    "Score: 3\nNext: 1\n-\t3\n1\t2\nQuality: 10\n"
+    "Score: 3\nNext: 1\n-\t3\n1\t2\nMoves: \8592 \8594 \8593\nQuality: 10\n"
 -}
 render :: Game -> String
 render g = unlines
     [ "Score: " <> show (score g)
     , "Next: " <> T.render (next g)
     , init (B.render (board g))
+    , "Moves: " <> unwords (fmap D.render (moves g))
     , "Quality: " <> show (quality g)
     ]
 
@@ -77,6 +79,12 @@ quality g
         , 1 * (numTiles g - numDuplicates g)
         ]
 
+moves :: Game -> [D.Direction]
+moves g = filter (B.canShift . B.rotateTo b) ds
+  where
+    b = board g
+    ds = [minBound :: D.Direction ..]
+
 numDuplicates :: Game -> Int
 numDuplicates g = length (filter p (group ns))
   where
@@ -85,7 +93,7 @@ numDuplicates g = length (filter p (group ns))
     ts = catMaybes (tiles g)
 
 numMoves :: Game -> Int
-numMoves = length . filter B.canShift . B.rotations . board
+numMoves = length . moves
 
 numTiles :: Game -> Int
 numTiles = length . tiles
