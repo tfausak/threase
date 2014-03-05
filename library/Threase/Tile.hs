@@ -61,4 +61,8 @@ render = show . number
 score :: Tile -> Integer
 score (Tile n) = if n < 3
     then 0
-    else 3 ^ (n `div` 3)
+    else 3 ^ (k + 1)
+      where
+        k = floor (logBase b x) :: Integer
+        b = 2 :: Double
+        x = fromIntegral (n `div` 3)

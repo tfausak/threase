@@ -58,6 +58,9 @@ spec = do
         it "returns 9 for 6" $ do
             score (Tile 6) `shouldBe` 9
 
+        it "returns 27 for 12" $ do
+            score (Tile 12) `shouldBe` 27
+
     describe "number" $ do
         it "returns the tile's number" $ do
             number (Tile 1) `shouldBe` 1
