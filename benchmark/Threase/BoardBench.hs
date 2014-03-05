@@ -18,6 +18,7 @@ benchmarks =
     , bench "rotations" $ whnf rotations board
     , bench "score" $ whnf score board
     , bench "shift" $ whnf shift board
+    , bench "shiftWith" $ whnf shift board
     ]
   where
     board = Board

@@ -16,14 +16,15 @@ module Threase.Board
     , rotations
     , score
     , shift
+    , shiftWith
     ) where
 
 import           Data.List         (transpose)
 import           Threase.Direction (Direction (..))
+import qualified Threase.Tile      as T
 import qualified Threase.Vector    as V
 
 {- $setup
-    >>> import qualified Threase.Tile as T
     >>> :{
         let board = Board
             [ V.Vector [Nothing, Just (T.Tile 3)]
@@ -144,3 +145,19 @@ score = sum . fmap V.score . vectors
 -}
 shift :: Board -> Board
 shift = Board . fmap V.shift . vectors
+
+{- |
+    Shifts all the vectors in a board and inserts a new tile on the trailing
+    edge at the given position.
+
+    >>> render (shiftWith board (T.Tile 1) 0)
+    "3\t1\n3\t-\n"
+-}
+shiftWith :: Board -> T.Tile -> Int -> Board
+shiftWith b t n = Board vs'
+  where
+    vs' = fmap f vs
+    f (i, v) = if i == n
+        then V.shiftWith v t
+        else V.shift v
+    vs = zip [0 ..] (vectors b)

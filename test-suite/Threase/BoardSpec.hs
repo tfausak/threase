@@ -146,3 +146,24 @@ spec = do
                     , Vector [t', t, t, n]
                     ]
             shift b `shouldBe` b'
+
+    describe "shiftWith" $ do
+        it "does nothing if the board can't be shifted" $ do
+            let t = Just (Tile 1)
+                v = Vector (replicate 4 t)
+                b = Board (replicate 4 v)
+            shiftWith b (Tile 1) 0 `shouldBe` b
+
+        it "inserts the new tile" $ do
+            let n = Nothing
+                t = Just (Tile 1)
+                t' = Tile 2
+                v = Vector [n, t, n, n]
+                b = Board (replicate 4 v)
+                b' = Board
+                    [ Vector [t, n, n, Just t']
+                    , Vector [t, n, n, n]
+                    , Vector [t, n, n, n]
+                    , Vector [t, n, n, n]
+                    ]
+            shiftWith b t' 0 `shouldBe` b'
