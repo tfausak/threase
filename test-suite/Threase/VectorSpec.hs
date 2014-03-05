@@ -97,3 +97,16 @@ spec = do
                 t' = Just (Tile 6)
                 v' = Vector [t', t, t, Nothing]
             shift v `shouldBe` v'
+
+    describe "shiftWith" $ do
+        it "inserts the new tile at the end" $ do
+            let t1 = Just (Tile 1)
+                t2 = Tile 2
+                v = Vector [Nothing, t1, Nothing, Nothing]
+                v' = Vector [t1, Nothing, Nothing, Just t2]
+            shiftWith v t2 `shouldBe` v'
+
+        it "does nothing if the vector can't be shifted" $ do
+            let v = Vector [Just (Tile 1), Nothing, Nothing, Nothing]
+                t = Tile 2
+            shiftWith v t `shouldBe` v

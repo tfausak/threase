@@ -10,6 +10,7 @@ module Threase.Vector
     , render
     , score
     , shift
+    , shiftWith
     ) where
 
 import           Data.List    (intercalate)
@@ -79,3 +80,16 @@ shift = Vector . go . tiles
     go (Nothing : ts) = ts <> [Nothing]
     go (t : ts) = t : go ts
     go ts = ts
+
+{- |
+    Moves the tiles in a vector toward the head and inserts a tile at the tail.
+    See 'shift' for an explanation of the moving behavior. As long as
+    'canShift' is @True@, the last tile in the vector will be the given one.
+
+    >>> shiftWith (Vector [Nothing, Just (T.Tile 2)]) (T.Tile 1)
+    Vector {tiles = [Just (Tile {number = 2}),Just (Tile {number = 1})]}
+-}
+shiftWith :: Vector -> T.Tile -> Vector
+shiftWith v t = if canShift v
+    then Vector (init (tiles (shift v)) <> [Just t])
+    else v

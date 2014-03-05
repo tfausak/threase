@@ -10,6 +10,7 @@ benchmarks =
     , bench "render" $ whnf render vector
     , bench "score" $ whnf score vector
     , bench "shift" $ whnf shift vector
+    , bench "shiftWith" $ whnf shift vector
     ]
   where
     vector = Vector
