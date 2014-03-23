@@ -23,6 +23,6 @@ Quality: 26
 ```
 
 [1]: https://github.com/tfausak/threase
-[2]: https://travis-ci.org/tfausak/threase.png?branch=master
+[2]: https://travis-ci.org/tfausak/threase.svg?branch=master
 [3]: https://travis-ci.org/tfausak/threase
 [4]: http://asherv.com/threes/

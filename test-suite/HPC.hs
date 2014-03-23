@@ -6,6 +6,12 @@ import           System.Exit    (exitFailure, exitSuccess)
 import           System.Process (readProcess)
 import           Text.Regex     (matchRegex, mkRegex)
 
+arguments :: [String]
+arguments =
+    [ "report"
+    , "dist/hpc/tix/hspec/hspec.tix"
+    ]
+
 average :: (Fractional a, Real b) => [b] -> a
 average xs = realToFrac (sum xs) / genericLength xs
 
@@ -14,7 +20,7 @@ expected = 50
 
 main :: IO ()
 main = do
-    output <- readProcess "hpc" ["report", "dist/hpc/tix/hspec/hspec.tix"] ""
+    output <- readProcess "hpc" arguments ""
     if average (match output) >= expected
         then exitSuccess
         else putStr output >> exitFailure

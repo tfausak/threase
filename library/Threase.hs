@@ -7,4 +7,4 @@ import           Threase.Game      as Threase
 import           Threase.Tile      as Threase hiding (render, score)
 import           Threase.Vector    as Threase hiding (canShift, render, score,
                                                shift, shiftWith)
--- import X.X.X as Threase
+-- HASKELETON: import qualified New.Module as Threase

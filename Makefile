@@ -9,8 +9,8 @@ bench:
 
 clean:
 	cabal clean
-	if test -d .cabal-sandbox; then cabal sandbox delete; fi
-	if test -d .hpc; then rm -r .hpc; fi
+	test ! -d .cabal-sandbox || cabal sandbox delete
+	test ! -d .hpc || rm -r .hpc
 
 format:
 	git ls-files '*.hs' | xargs -n 1 scan --inplace-modify
@@ -29,7 +29,7 @@ hpc: test
 
 init:
 	cabal update
-	cabal --numeric-version | grep -F 1.18.0.2 || cabal install cabal-install
+	test $(cabal --numeric-version) = '1.18.0.3' || cabal install cabal-install-1.18.0.3
 	cabal sandbox init
 
 install: init

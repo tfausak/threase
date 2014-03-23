@@ -7,15 +7,15 @@ import qualified Threase.GameBench
 import qualified Threase.TileBench
 import qualified Threase.VectorBench
 import qualified ThreaseBench
--- import qualified X.X.XBench
+-- HASKELETON: import qualified New.Module
 
 main :: IO ()
 main = defaultMain
     [ bgroup "Threase" ThreaseBench.benchmarks
+    , bgroup "Threase.Board" Threase.BoardBench.benchmarks
+    , bgroup "Threase.Direction" Threase.DirectionBench.benchmarks
+    , bgroup "Threase.Game" Threase.GameBench.benchmarks
     , bgroup "Threase.Tile" Threase.TileBench.benchmarks
     , bgroup "Threase.Vector" Threase.VectorBench.benchmarks
-    , bgroup "Threase.Board" Threase.BoardBench.benchmarks
-    , bgroup "Threase.Game" Threase.GameBench.benchmarks
-    , bgroup "Threase.Direction" Threase.DirectionBench.benchmarks
-    -- , bgroup "X.X.X" X.X.XBench.benchmarks
+    -- HASKELETON: , bgroup "New.Module" New.ModuleBench.benchmarks
     ]
